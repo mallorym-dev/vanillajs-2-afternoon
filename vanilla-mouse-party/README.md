@@ -186,7 +186,7 @@ function draw(){
     ball.classList.add("ball");
     ball.style = style;
 
-    ball.addEventListener("animationend", function(e) {
+    ball.addEventListener("animationend", function(e {
       e.target.remove();
     });
 
