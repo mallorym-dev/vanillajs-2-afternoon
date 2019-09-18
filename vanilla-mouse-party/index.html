@@ -58,20 +58,27 @@
 </body>
 
 <script>
-const mousePosition = {'x': 0, 'y': 0};
-let drawId;
+    // environmant variables
+    const mousePosition = {
+        x: 0,
+        y: 0
+    };
+    let drawId;
 
-function getRandomNumber(min, max) {
-    return Math.round(Math.random() * (max - min + 1)) + min;
-}
-window.addEventListener('mousemove', function(e) {
-    mousePosition.x = e.pageX;
-    mousePosition.y = e.pageY;
-});
-function draw() {
-    return setInterval(function() {
-        const container = document.getElementById('wrap');
-        const color = `background:rgb(${getRandomNumber(
+    function getRandomNumber(min, max) {
+        return Math.round(Math.random() * (max - min + 1)) + min;
+    };
+// add a way for the app to 'listen' for the mouse to move. Then, capture the mouse position each time the mouse is moved so we know where to put the dots.
+    //add event listener to object.
+    window.addEventListener('mousemove', function(mouseMoveEvent){
+        mousePosition.x = mouseMoveEvent.pageX;
+        mousePosition.y = mouseMoveEvent.pageY;
+    })
+    // create/destroy dots
+    function draw() {
+        return setInterval(function() {
+            const container = document.getElementById('wrap');
+            const color = `background:rgb(${getRandomNumber(
             0,
             255
           )},${getRandomNumber(0, 255)}, ${getRandomNumber(0, 255)});`;
@@ -96,16 +103,17 @@ function draw() {
           });
 
           container.appendChild(ball);
-    }, 50)
-}
+        }, 50);
+    }
 
-window.addEventListener('mouseover', function() {
-    drawId = draw();
-});
+    //create event listener
+    window.addEventListener('mouseover', function(){
+        drawId = draw();
+    });
 
-window.addEventListener('mouseout', function() {
-    clearInterval(drawId);
-});
+    window.addEventListener('mouseout', function(){
+        clearInterval(drawId)
+    });
 </script>
 
 </html>
